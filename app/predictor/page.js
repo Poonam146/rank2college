@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { toast } from "react-toastify";
-export default function predictor() {
+export default function Predictor() {
     const [formData, setFormData] = useState({
     rank: '',
     seatType: 'OPEN',
