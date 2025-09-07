@@ -14,72 +14,88 @@ export default function Predictor() {
   const [isLoading, setIsLoading] = useState(false);
   const [eligibleMessage, setEligibleMessage] = useState('');
   
-  const predictCollege = async () => {
-    setError('');
-    setEligibleColleges([]);
-    setIsLoading(true);
+ const predictCollege = async () => {
+  setError('');
+  setEligibleColleges([]);
+  setIsLoading(true);
 
-    try {
-      const response = await fetch('/api/predict', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch('/api/predict', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
 
-      if (!response.ok) throw new Error('Network error');
-      const data = await response.json();
+    const data = await response.json();
 
-      if (!data.eligibleColleges || data.eligibleColleges.length === 0) {
-        setEligibleMessage(
-          'No eligible colleges found for the given rank. Redirecting to FAQ...'
-        );
-        setTimeout(() => (window.location.href = '/faqs'), 5000);
-      } else {
-        displayResults(data.eligibleColleges);
-      }
-    } catch (error) {
-      setError('Error fetching data');
-      toast.error('An error occurred. Please try again.');
-    } finally {
-      setIsLoading(false);
+    if (!response.ok) {
+      // If the API returns an error (like status 400), use the error message from data.error
+      throw new Error(data.error || 'Unknown error occurred');
     }
-  };
+
+    if (!data.eligibleColleges || data.eligibleColleges.length === 0) {
+      setEligibleMessage(
+        'No eligible colleges found for the given rank. Redirecting to FAQ in 5 seconds...'
+      );
+      setTimeout(() => {
+        window.location.href = '/faqs';
+      }, 5000);
+    } else {
+      displayResults(data.eligibleColleges);
+    }
+  } catch (e) {
+    
+    setError(e.message);
+    toast.error(e.message || 'An error occurred. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   function displayResults(colleges) {
-    const filtered = colleges.filter((c) => c);
+  const filtered = colleges.filter((c) => c);
 
-    if (!filtered || filtered.length === 0) {
-      setEligibleMessage('No eligible colleges found.');
-      setTimeout(() => (window.location.href = '/faq'), 1000);
-      return;
-    }
+  if (!filtered || filtered.length === 0) {
+    setEligibleMessage('No eligible colleges found.');
+    setTimeout(() => (window.location.href = '/faq'), 1000);
+    return;
+  }
 
-    if (formData.domicile === 'all') {
-      setEligibleMessage(`Showing ${filtered.length} eligible options.`);
-      setEligibleColleges(filtered);
-    } else {
-      const homeState = filtered.filter(
-        (c) => c['Quota'] === 'HS' && c['State'] === formData.domicile
-      );
-      const otherState = filtered.filter((c) => !(c['Quota'] === 'HS'));
+  if (formData.domicile === 'all') {
+    setEligibleMessage(`Showing ${filtered.length} eligible options.`);
+    setEligibleColleges(filtered);
+  } else {
+    const homeState = filtered.filter(
+      (c) => c['Quota'] === 'HS' && c['State'] === formData.domicile
+    );
+    const otherState = filtered.filter((c) => !(c['Quota'] === 'HS'));
 
-      setEligibleMessage(
-        `Showing ${homeState.length + otherState.length} options. Data updated till 2024 round 5.`
-      );
+    let combined = [];
+    if (homeState.length > 0) {
+      combined.push({ isHeader: true, text: `🏠 Home State (${formData.domicile})` });
+      combined.push(...homeState);
+    } else {
+      combined.push({ isHeader: true, text: `🏠 Home State (${formData.domicile}): No eligible options.` });
+    }
+    if (otherState.length > 0) {
+      combined.push({ isHeader: true, text: '🌍 Other States' });
+      combined.push(...otherState);
+    }
+    // If BOTH are empty, just show "No eligible colleges found":
+    if (homeState.length === 0 && otherState.length === 0) {
+      setEligibleMessage('No eligible colleges found.');
+      setTimeout(() => (window.location.href = '/faq'), 1000);
+      return;
+    }
 
-      const combined = [];
-      if (homeState.length > 0) {
-        combined.push({ isHeader: true, text: `🏠 Home State (${formData.domicile})` });
-        combined.push(...homeState);
-      }
-      if (otherState.length > 0) {
-        combined.push({ isHeader: true, text: '🌍 Other States' });
-        combined.push(...otherState);
-      }
+    setEligibleMessage(
+      `Showing ${homeState.length + otherState.length} options. Data updated till 2024 round 5.`
+    );
+    setEligibleColleges(combined);
+  }
+}
 
-      setEligibleColleges(combined);
-    }
-  }
 
   const calculateProbability = (opening, closing, rank) => {
     const range = closing - opening;
@@ -269,11 +285,12 @@ export default function Predictor() {
         {isLoading ? "Predicting..." : "Predict My Colleges"}
       </button>
     </div>
+      <div className="flex justify-center items-center">  {error}</div>
 
   </form>
-  
+
 </div>
-   {error && <p style={{ color: 'red' }}>{error}</p>}
+  
 
       {/* Results */}
       {eligibleMessage && (

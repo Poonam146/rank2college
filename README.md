@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rank2College -- JEE Main College Predictor
 
-## Getting Started
 
-First, run the development server:
+Rank2College is an intuitive tool that helps JEE Main aspirants discover
+eligible colleges based on their rank, category, state, and
+more---powered by previous years' cutoff data (JoSAA Round 5, 2024).
 
-```bash
+------------------------------------------------------------------------
+
+## ✨ Features
+
+-   **Instant College Prediction**: Get a list of eligible NITs, IIITs,
+    and GFTIs tailored to your preferences.
+-   **Smart Filters**: Filter by category, college type, domicile, and
+    gender.
+-   **Probability Indicator**: See at a glance your admission chances:
+    "Very High", "High", "Medium", or "Low".
+-   **Mobile Friendly**: Fully responsive, works smoothly on all
+    devices.
+-   **Modern UI**: Clean, accessible, and dark mode supported.
+
+------------------------------------------------------------------------
+
+## 🚀 Getting Started
+
+### 1. **Clone the repository**
+
+git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git cd YOUR-REPO
+
+### 2. **Install dependencies**
+
+npm install
+
+or yarn install
+
+### 3. **Run the app locally**
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+or yarn dev
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Visit `http://localhost:3000` to view it in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+------------------------------------------------------------------------
 
-## Learn More
+## 🖥️ Usage
 
-To learn more about Next.js, take a look at the following resources:
+1.  Enter your JEE Main rank and select your category.
+2.  Choose college type(s), state (domicile), and gender if required.
+3.  Hit **Predict My Colleges** to see your personalized list.
+4.  Review college details, opening/closing ranks, and probability
+    indicators.
+5.  Adjust filters or visit the [FAQ](/faqs) if needed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+------------------------------------------------------------------------
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 About the Developer
 
-## Deploy on Vercel
+**Developed by [Poonam
+Mahawar](https://www.linkedin.com/in/poonam-mahawar/)**\
+IIIT Bhagalpur, Batch of 2027
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+------------------------------------------------------------------------
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+This project is open-source and available under the [MIT
+License](LICENSE).
+
+
+------------------------------------------------------------------------
