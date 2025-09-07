@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Image from 'next/image';
 
 function AboutPage() {
   return (
@@ -15,21 +16,25 @@ function AboutPage() {
           <p>
             Designed to help students make informed decisions
             about <span className="font-medium">college admissions based on JEE Main ranks</span>.
-            Our platform provides personalized lists of eligible colleges as per your preferences and previous years' data for a smooth counseling process.
+            Our platform provides personalized lists of eligible colleges as per your preferences and previous years  data for a smooth counseling process.
           </p>
           <p className="mt-4">
-            Whether you're aiming for NITs, IIITs, or GFTIs, College Nexus is a reliable guidance tool, making your college search simpler and clearer.
+            Whether you &apos; re aiming for NITs, IIITs, or GFTIs, College Nexus is a reliable guidance tool, making your college search simpler and clearer.
             We update our predictions with the latest available cutoff data each year for the best accuracy.
           </p>
         </div>
         <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex flex-col items-center">
-          <img
-            src="https://ui-avatars.com/api/?name=Poonam+Mahawar&background=5a67d8&color=fff&size=128"
-            alt="Developer: Poonam Mahawar"
-            className="mb-4 rounded-full shadow-lg"
-            width={80}
-            height={80}
-          />
+        
+
+
+<Image
+  src="https://ui-avatars.com/api/?name=Poonam+Mahawar&background=5a67d8&color=fff&size=128"
+  alt="Developer: Poonam Mahawar"
+  width={80}
+  height={80}
+  className="rounded-full shadow-lg mb-4"
+/>
+
           <div className="text-gray-900 dark:text-gray-100 font-semibold">
             Developed by Poonam Mahawar
           </div>

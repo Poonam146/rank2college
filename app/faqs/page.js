@@ -18,7 +18,10 @@ function Page() {
           <p>There could be several reasons why no colleges are shown as eligible for a particular rank:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li><span className="font-medium">High Rank:</span> Your rank might not be in the range of previous year OR-CR range, so no college is filtered. Try approximating your rank by +/- 100 ranks for better results.</li>
-            <li><span className="font-medium">Data Limitations:</span> The predictions are based on the previous year's data (JoSAA 2024, 5th round). Cutoffs may vary yearly.</li>
+           <li>
+  <span className="font-medium">Data Limitations:</span> The predictions are based on previous year&apos;s cutoff data (JoSAA 2024, 5th round). Please note that cutoffs can vary each year due to factors such as exam difficulty, number of applicants, and seat availability.
+</li>
+
             <li><span className="font-medium">Filters:</span> Selected filters may limit the result set. Adjust filters to broaden the results.</li>
           </ul>
           <p>If unsure, contact us at <a href="mailto:support@gmail.com" className="text-blue-300 hover:underline">support@gmail.com</a>.</p>
